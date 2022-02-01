@@ -3,6 +3,7 @@ import React from 'react';
 
 
 import LogoSVG  from '../../assets/logo.svg'
+import { Cars } from '../../Components/Cars';
 
 
 
@@ -14,8 +15,20 @@ import {
 } from './styled'
 
 export function Home(){
-  return(
+  const CarDate = {
+    title:'audi',
+    name:'R$ 5 Coupé',
+    rent:{
+      period:'Ao dia',
+      price:120,
+    },
+    thumbnail:'https://freepngimg.com/thumb/audi/35227-5-audi-rs5-red.png'
+  }
 
+
+
+
+  return(
  <Container>  
      <StatusBar
         style="light"
@@ -29,10 +42,20 @@ export function Home(){
           />
           <Title>Total de 12 carros</Title>
       </HeaderContent>
-
-
-
     </Header>
+
+    <Cars
+      data={CarDate}   
+    />
+
+    <Cars
+          data={CarDate}   
+        />
+
+    <Cars
+          data={CarDate}   
+        />
+
   </Container>
 );
 }
