@@ -12,6 +12,7 @@ import {
   Header,
   HeaderContent,
   Title,
+  Carlist
 } from './styled'
 
 export function Home(){
@@ -44,17 +45,16 @@ export function Home(){
       </HeaderContent>
     </Header>
 
-    <Cars
-      data={CarDate}   
+    <Carlist
+      data={[1,2,3,4,5,6,7]}
+      keyExtractor={item => String(item)}
+      renderItem={({item}) => <Cars
+        data={CarDate}
+      />}
+    
     />
 
-    <Cars
-          data={CarDate}   
-        />
-
-    <Cars
-          data={CarDate}   
-        />
+    
 
   </Container>
 );
