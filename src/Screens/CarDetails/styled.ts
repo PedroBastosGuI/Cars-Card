@@ -82,6 +82,13 @@ export const Acessories = styled.View`
   align-items:center;
   justify-content:center;
   margin-top:16px;
-  
 
+`;
+
+export const Footer = styled.View`
+  width:100%;
+  background-color:${({theme}) => theme.colors.background_primary};
+
+  padding: 24px 24px;
+  padding-bottom: 24px;
 `;
