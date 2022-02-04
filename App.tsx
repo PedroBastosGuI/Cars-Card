@@ -17,8 +17,13 @@ import {
 
 import AppLoading from 'expo-app-loading';
 import { CarDetails } from './src/Screens/CarDetails';
+import { Scheduling } from './src/Screens/Scheduling';
 
+import { LogBox } from 'react-native';
 
+LogBox.ignoreLogs([
+  "[react-native-gesture-handler] Seems like you\'re using an old API with gesture components, check out new Gestures system!",
+]);
 
 
 export default function App() {
@@ -38,7 +43,7 @@ export default function App() {
   return (
   
   <ThemeProvider theme={theme}> 
-      <CarDetails/>
+      <Scheduling/>
   </ThemeProvider>
    
   );
