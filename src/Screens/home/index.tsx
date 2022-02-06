@@ -39,7 +39,7 @@ export function Home(){
       <HeaderContent>
           <LogoSVG
             width={108}
-            height={12}
+            height={12} 
           />
           <Title>Total de 12 carros</Title>
       </HeaderContent>

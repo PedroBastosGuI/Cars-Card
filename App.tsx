@@ -17,7 +17,7 @@ import {
 
 import AppLoading from 'expo-app-loading';
 import { CarDetails } from './src/Screens/CarDetails';
-import { Scheduling } from './src/Screens/Scheduling';
+import { SchedulingDetails } from './src/Screens/SchedulingDetails';
 
 import { LogBox } from 'react-native';
 
@@ -43,7 +43,7 @@ export default function App() {
   return (
   
   <ThemeProvider theme={theme}> 
-      <Scheduling/>
+      <SchedulingDetails/>
   </ThemeProvider>
    
   );
