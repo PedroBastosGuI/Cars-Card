@@ -1,11 +1,12 @@
 import React from 'react';
+import {TouchableOpacityProps} from 'react-native';
 
 import {
     Container,
     Title
 } from './styled';
 
-interface Props{
+interface Props extends TouchableOpacityProps{
     title: string;
     color?:string;
 

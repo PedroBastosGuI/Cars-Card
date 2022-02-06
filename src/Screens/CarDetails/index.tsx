@@ -9,7 +9,9 @@ import forceSvg from "../../assets/force.svg";
 import gasolineSvg from "../../assets/gasoline.svg";
 import exchance from "../../assets/exchange.svg";
 import people from "../../assets/people.svg";
-
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import { RootStackParamsList } from '../../Routes/app.routes';
 
 import {
    Container,
@@ -29,11 +31,16 @@ import {
 } from './styled'
 import { Button } from '../../Components/Button';
 
+interface PropsRoot extends NativeStackNavigationProp<RootStackParamsList,'CarDetails'>{}
+
 export function CarDetails(){
-  return(
+   const navigation = useNavigation<PropsRoot>();
+   return(
  <Container>
      <Header>
-        <ButtonBack/>
+        <ButtonBack
+            onPress={() => navigation.navigate('Home')}
+        />
      </Header>
      <CarImages>
          <ImageSlider 
@@ -83,6 +90,7 @@ export function CarDetails(){
       <Footer>
          <Button
             title="Confirmar"
+            onPress={()=> navigation.navigate('Scheduling')}
          />
       </Footer>
 

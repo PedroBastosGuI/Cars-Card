@@ -2,7 +2,7 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import theme from './src/style/global/theme';
 
-import { Home } from './src/Screens/home';
+import {NavigationContainer} from '@react-navigation/native'
 
 import {
   useFonts,
@@ -16,10 +16,8 @@ import {
 } from '@expo-google-fonts/inter';
 
 import AppLoading from 'expo-app-loading';
-import { CarDetails } from './src/Screens/CarDetails';
-import { SchedulingDetails } from './src/Screens/SchedulingDetails';
-
 import { LogBox } from 'react-native';
+import { AppRoutes } from './src/Routes/app.routes';
 
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you\'re using an old API with gesture components, check out new Gestures system!",
@@ -42,8 +40,10 @@ export default function App() {
 
   return (
   
-  <ThemeProvider theme={theme}> 
-      <SchedulingDetails/>
+  <ThemeProvider theme={theme}>
+    <NavigationContainer>
+      <AppRoutes/>
+    </NavigationContainer>
   </ThemeProvider>
    
   );

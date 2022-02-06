@@ -1,7 +1,7 @@
 import React from 'react';
 import {Entypo} from '@expo/vector-icons';
 import {useTheme} from 'styled-components';
-import {BorderlessButtonProps} from 'react-native-gesture-handler';
+import {TouchableOpacityProps} from 'react-native';
 
 import {
 Container
@@ -11,7 +11,7 @@ Container
 
 //tipando pra mudar a cor com a verificação 
 
-interface Props extends BorderlessButtonProps{
+interface Props extends TouchableOpacityProps{
     color?: string;
 }
 

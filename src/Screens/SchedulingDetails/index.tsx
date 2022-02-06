@@ -12,6 +12,7 @@ import people from "../../assets/people.svg";
 
 import {Feather} from '@expo/vector-icons';
 import {useTheme} from 'styled-components';
+import {useNavigation} from '@react-navigation/native';
 
 import {
    Container,
@@ -41,14 +42,24 @@ import {
 } from './styled'
 import { Button } from '../../Components/Button';
 
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import { RootStackParamsList } from '../../Routes/app.routes';
+
+interface PropsRoot extends NativeStackNavigationProp<RootStackParamsList,'SchedulingDetails'>{}
+
 export function SchedulingDetails(){
 
    const theme = useTheme();
+   const navigation = useNavigation<PropsRoot>();
 
   return(
+
  <Container>
      <Header>
-        <ButtonBack/>
+        <ButtonBack
+         onPress={() => navigation.navigate('Scheduling')}
+
+        />
      </Header>
      <CarImages>
          <ImageSlider 
@@ -119,6 +130,8 @@ export function SchedulingDetails(){
          <Button
             title="Alugar agora"
             color={theme.colors.success}
+            onPress={() => navigation.navigate('SchedulingComplete')}
+
          />
       </Footer>
 

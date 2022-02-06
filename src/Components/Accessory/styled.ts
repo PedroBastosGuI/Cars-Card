@@ -11,7 +11,7 @@ export const Container = styled.View`;
     margin-bottom: 8px;
     margin-right: -8px;
 
-    background-color: ${({theme}) => theme.colors.text_detail};
+    background-color: ${({theme}) => theme.colors.background_primary};
 
     padding:16px;
     margin-right:6px;

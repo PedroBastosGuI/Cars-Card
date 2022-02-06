@@ -1,6 +1,7 @@
 import React from 'react';
 import { ButtonBack } from '../../Components/ButtonBack';
 import Arrow from '../../assets/arrow.svg';
+import {useNavigation} from '@react-navigation/native';
 
 import {
 Container,
@@ -18,6 +19,8 @@ import { Button } from '../../Components/Button';
 import { Calendar } from '../../Components/Calendar';
 
 export function Scheduling(){
+    const navigation = useNavigation();
+
   return(
  <Container>
     <Header>
@@ -26,7 +29,10 @@ export function Scheduling(){
             translucent
             backgroundColor="transparent"
         />
-        <ButtonBack/>
+        <ButtonBack
+            onPress={() => navigation.goBack('Home')}
+
+        />
         <Title>
         Escolha uma{'\n'}
         data de início e{'\n'}
@@ -55,6 +61,7 @@ export function Scheduling(){
     <Footer>
         <Button
             title='Confirmar'
+            onPress={() => navigation.navigate('SchedulingDetails')}
         />
     </Footer>
      

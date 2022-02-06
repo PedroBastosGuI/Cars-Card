@@ -1,9 +1,13 @@
+import {useNavigation} from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 
 
 import LogoSVG  from '../../assets/logo.svg'
 import { Cars } from '../../Components/Cars';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import { RootStackParamsList } from '../../Routes/app.routes';
+
 
 
 
@@ -13,9 +17,13 @@ import {
   HeaderContent,
   Title,
   Carlist
-} from './styled'
+} from './styled';
+
+interface PropsType extends NativeStackNavigationProp<RootStackParamsList,'Home'>{}
 
 export function Home(){
+
+
   const CarDate = {
     title:'audi',
     name:'R$ 5 Coupé',
@@ -25,14 +33,16 @@ export function Home(){
     },
     thumbnail:'https://freepngimg.com/thumb/audi/35227-5-audi-rs5-red.png'
   }
+  const navigation = useNavigation<PropsType>();
 
-
-
+ 
+  
 
   return(
  <Container>  
      <StatusBar
         style="light"
+        translucent
      />
     <Header>
       
@@ -48,8 +58,10 @@ export function Home(){
     <Carlist
       data={[1,2,3,4,5,6,7]}
       keyExtractor={item => String(item)}
-      renderItem={({item}) => <Cars
-        data={CarDate}
+      renderItem={({item}) => 
+      <Cars
+      data={CarDate}
+      onPress={()=> navigation.navigate('CarDetails')}
       />}
     
     />

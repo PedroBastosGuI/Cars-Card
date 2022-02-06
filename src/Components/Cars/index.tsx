@@ -1,7 +1,9 @@
 import React from 'react';
 
-import GasolineSvg from '../../assets/gasoline.svg';
 import EnergySvg from '../../assets/energy.svg';
+
+import {TouchableOpacityProps} from 'react-native';
+
 import {
 Container,
 InformationContent,
@@ -28,14 +30,16 @@ interface CarData {
 };
 
 
-interface Props{
+interface Props extends TouchableOpacityProps{
   data:CarData
 }
 
 
-export function Cars({data}:Props){
+export function Cars({data,...rest}:Props){
   return(
- <Container>
+ <Container
+    {...rest}
+ >
         <InformationContent>
 
             <TextInformation>
