@@ -19,7 +19,7 @@ CarImage,
 } from './styled';
 
 interface CarData {
-    title: string;
+    brand: string;
     name: string;
     rent:{
         period: string;
@@ -43,7 +43,7 @@ export function Cars({data,...rest}:Props){
         <InformationContent>
 
             <TextInformation>
-                <TitleCarName>{data.title}</TitleCarName>
+                <TitleCarName>{data.brand}</TitleCarName>
                 <CarModel>{data.name}</CarModel>
             </TextInformation>
 

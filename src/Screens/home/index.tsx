@@ -8,7 +8,8 @@ import { Cars } from '../../Components/Cars';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import { RootStackParamsList } from '../../Routes/app.routes';
 
-
+import {api} from '../../services/api';
+import {CarDTO} from '../../dtos/CarDTO';
 
 
 import {
@@ -18,11 +19,19 @@ import {
   Title,
   Carlist
 } from './styled';
+import { Alert } from 'react-native';
+import { Load } from '../../Components/Load';
 
 interface PropsType extends NativeStackNavigationProp<RootStackParamsList,'Home'>{}
 
 export function Home(){
+// estado para armazenar a resposta para
 
+const [cars, setCars] = React.useState<CarDTO[]>([]);
+
+//pra garantir o carregamento da aplicação 
+
+const [loading, setLoading] = React.useState(true);
 
   const CarDate = {
     title:'audi',
@@ -35,9 +44,24 @@ export function Home(){
   }
   const navigation = useNavigation<PropsType>();
 
- 
-  
+ React.useEffect(()=>{
 
+  async function fetchCars() {
+  try{
+      const response = await api.get('/cars');
+      setCars(response.data)
+     } catch(error) {
+      console.log(error);
+  } finally{
+    setLoading(false)
+  }
+
+  }
+
+  fetchCars()
+
+ },[])
+  
   return(
  <Container>  
      <StatusBar
@@ -54,17 +78,19 @@ export function Home(){
           <Title>Total de 12 carros</Title>
       </HeaderContent>
     </Header>
-
-    <Carlist
-      data={[1,2,3,4,5,6,7]}
-      keyExtractor={item => String(item)}
-      renderItem={({item}) => 
-      <Cars
-      data={CarDate}
-      onPress={()=> navigation.navigate('CarDetails')}
-      />}
+      {loading ? <Load/> : 
+        <Carlist
+        data={cars}
+        keyExtractor={item => item.id}
+        renderItem={({item}) => 
+        <Cars
+        data={item}
+        onPress={()=> navigation.navigate('CarDetails')}
+        />}
+      
+      />
+      }
     
-    />
 
     
 
