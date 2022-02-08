@@ -31,6 +31,7 @@ import {
 } from './styled'
 import { Button } from '../../Components/Button';
 import { CarDTO } from '../../dtos/CarDTO';
+import { getAcessoryIcon } from '../../utils/getAcessoryIcon';
 
 interface PropsRoot extends NativeStackNavigationProp<RootStackParamsList,'CarDetails'>{}
 
@@ -82,7 +83,7 @@ export function CarDetails(){
                      <Accessory 
                      key={acessory.type}
                      name={acessory.name}
-                      icon={speedSvg}/>
+                      icon={getAcessoryIcon(acessory.type)}/>
                   ))
                }
          </Accessories>
