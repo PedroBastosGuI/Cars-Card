@@ -74,7 +74,7 @@ export const Abouat = styled.Text`
   margin-top:23px;
 `;
 
-export const Acessories = styled.View`
+export const Accessories = styled.View`
   width:100%;
   flex-direction:row;
   flex-wrap:wrap;

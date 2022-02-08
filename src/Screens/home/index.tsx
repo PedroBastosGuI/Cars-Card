@@ -33,16 +33,13 @@ const [cars, setCars] = React.useState<CarDTO[]>([]);
 
 const [loading, setLoading] = React.useState(true);
 
-  const CarDate = {
-    title:'audi',
-    name:'R$ 5 Coupé',
-    rent:{
-      period:'Ao dia',
-      price:120,
-    },
-    thumbnail:'https://freepngimg.com/thumb/audi/35227-5-audi-rs5-red.png'
-  }
   const navigation = useNavigation<PropsType>();
+
+  //tipando a funçao pra passando informaçoes entre telas
+  function handleCarsDetails(car: CarDTO) {
+    //para passar as informaçoes
+    navigation.navigate('CarDetails', {car})
+  }
 
  React.useEffect(()=>{
 
@@ -85,15 +82,13 @@ const [loading, setLoading] = React.useState(true);
         renderItem={({item}) => 
         <Cars
         data={item}
-        onPress={()=> navigation.navigate('CarDetails')}
+        onPress={()=> handleCarsDetails(item)}
         />}
       
       />
       }
-    
-
-    
-
   </Container>
 );
 }
+
+//passando dados de uma tela para outra texto

@@ -10,14 +10,18 @@ import { CarDetails } from '../Screens/CarDetails';
 import { Scheduling } from '../Screens/Scheduling';
 import { SchedulingDetails } from '../Screens/SchedulingDetails';
 import { SchedulingComplete } from '../Screens/SchedulingComplete';
+import { CarDTO } from '../dtos/CarDTO';
 
 
 export type RootStackParamsList ={ 
     Home:undefined;
-    CarDetails:undefined;
+    //quando passa vai passar um parametro entre screens
+    CarDetails:{car:CarDTO};
     Scheduling:undefined;
     SchedulingDetails:undefined;
     SchedulingComplete:undefined;
+   
+
 }
 
 

@@ -9,7 +9,7 @@ import forceSvg from "../../assets/force.svg";
 import gasolineSvg from "../../assets/gasoline.svg";
 import exchance from "../../assets/exchange.svg";
 import people from "../../assets/people.svg";
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import { RootStackParamsList } from '../../Routes/app.routes';
 
@@ -26,15 +26,28 @@ import {
    Price,
    Descripition,
    Abouat,
-   Acessories,
+   Accessories,
    Footer
 } from './styled'
 import { Button } from '../../Components/Button';
+import { CarDTO } from '../../dtos/CarDTO';
 
 interface PropsRoot extends NativeStackNavigationProp<RootStackParamsList,'CarDetails'>{}
 
+// para poder desesturutura
+
+interface Params{
+   car: CarDTO;
+}
+
 export function CarDetails(){
+
    const navigation = useNavigation<PropsRoot>();
+   //para pegar a informação
+   const route = useRoute();
+   //desestruturando
+   const {car}  = route.params as Params
+
    return(
  <Container>
      <Header>
@@ -44,45 +57,38 @@ export function CarDetails(){
      </Header>
      <CarImages>
          <ImageSlider 
-               imagesUrl={['https://freepngimg.com/thumb/audi/35227-5-audi-rs5-red.png']}
+               imagesUrl={car.photos}
          />
      </CarImages>
 
       <Content>
          <Details>
             <Descripition>
-               <Brand>Audi</Brand>
-               <Name>Huracan</Name>
+               <Brand>{car.brand}</Brand>
+               <Name>{car.name}</Name>
             </Descripition>
             
          
 
          <Rent>
-            <Period>Ao Dia</Period>
-            <Price>R$ 580</Price>
+            <Period>{car.rent.period}</Period>
+            <Price> R$ {car.rent.price}</Price>
          </Rent>
          </Details>
 
-         <Acessories>
-            <Accessory name="380km/h" icon={speedSvg}/>
-            <Accessory name="3.2s" icon={accelerationSvg}/>
-            <Accessory name="800 HP" icon={forceSvg}/>
-            <Accessory name="Gasolina" icon={gasolineSvg}/>
-            <Accessory name="Auto" icon={exchance}/>
-            <Accessory name="2 pessoas" icon={people}/>
-
-         </Acessories>
+         <Accessories>
+               {
+                  car.accessories.map(acessory => (
+                     <Accessory 
+                     key={acessory.type}
+                     name={acessory.name}
+                      icon={speedSvg}/>
+                  ))
+               }
+         </Accessories>
 
          <Abouat>
-         Este é automóvel desportivo. Surgiu do lendário touro de lide
-          indultado na praça Real Maestranza de Sevilla.
-          É um belíssimo carro para quem gosta de acelerar
-          Este é automóvel desportivo. Surgiu do lendário touro de lide
-          indultado na praça Real Maestranza de Sevilla.
-          É um belíssimo carro para quem gosta de acelerar
-          Este é automóvel desportivo. Surgiu do lendário touro de lide
-          indultado na praça Real Maestranza de Sevilla.
-          É um belíssimo carro para quem gosta de acelerar
+            {car.about}
          </Abouat>
 
       </Content>
