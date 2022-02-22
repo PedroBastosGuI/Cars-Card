@@ -33,7 +33,6 @@ import { Button } from '../../Components/Button';
 import { CarDTO } from '../../dtos/CarDTO';
 import { getAcessoryIcon } from '../../utils/getAcessoryIcon';
 
-interface PropsRoot extends NativeStackNavigationProp<RootStackParamsList,'CarDetails'>{}
 
 // para poder desesturutura
 
@@ -43,11 +42,16 @@ interface Params{
 
 export function CarDetails(){
 
-   const navigation = useNavigation<PropsRoot>();
+   const navigation = useNavigation();
    //para pegar a informação
    const route = useRoute();
    //desestruturando
    const {car}  = route.params as Params
+
+
+   function handleConfirmRental(){
+      navigation.navigate('Scheduling', {car});
+   }
 
    return(
  <Container>
@@ -97,7 +101,7 @@ export function CarDetails(){
       <Footer>
          <Button
             title="Confirmar"
-            onPress={()=> navigation.navigate('Scheduling')}
+            onPress={handleConfirmRental}
          />
       </Footer>
 

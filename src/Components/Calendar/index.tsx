@@ -15,7 +15,7 @@ LocaleConfig.defaultLocale = 'pt-br';
 interface MarkedDateProps{
     [date: string]:{
         color: string;
-        text: string;
+        textColor: string;
         disabled?:boolean;
         disableTouachEvent?:boolean;
     }
