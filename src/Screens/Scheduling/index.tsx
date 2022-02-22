@@ -16,10 +16,35 @@ Footer,
 } from './styled'
 import { StatusBar } from 'react-native';
 import { Button } from '../../Components/Button';
-import { Calendar } from '../../Components/Calendar';
+import { Calendar, DayProps, GenereteInterval,MarkedDateProps } from '../../Components/Calendar';
 
 export function Scheduling(){
+    const[lastSelectedDate, setLastSelectedDate] = React.useState<DayProps>({} as DayProps);
+    const[markedDates, setMarkedDates] = React.useState<MarkedDateProps>({} as MarkedDateProps);
+
+
+
+
     const navigation = useNavigation();
+
+
+    const handleChangeDate = (day:DayProps) => {
+        let start = !lastSelectedDate.timestamp ? day : lastSelectedDate;
+        let end = day;
+
+        //Se o usuario selecionar uma data maior
+
+        if(start.timestamp > end.timestamp) {
+            start = end;
+            end = start;
+        }
+
+        setLastSelectedDate(end);
+
+        const interval = GenereteInterval(start,end);
+
+        setMarkedDates(interval);
+    };
 
   return(
  <Container>
@@ -55,7 +80,11 @@ export function Scheduling(){
      </Header>
 
     <Content>
-        <Calendar/>
+        <Calendar
+        markedDates={markedDates}
+        onDayPress={handleChangeDate}
+        
+        />
     </Content>
 
     <Footer>
