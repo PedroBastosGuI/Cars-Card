@@ -11,6 +11,7 @@ import { Scheduling } from '../Screens/Scheduling';
 import { SchedulingDetails } from '../Screens/SchedulingDetails';
 import { SchedulingComplete } from '../Screens/SchedulingComplete';
 import { CarDTO } from '../dtos/CarDTO';
+import { Mycar } from '../Screens/Mycar';
 
 
 export type RootStackParamsList ={ 
@@ -68,6 +69,11 @@ export function AppRoutes() {
              <Stack.Screen 
                 name="SchedulingComplete"
                 component={SchedulingComplete}           
+            />
+
+            <Stack.Screen 
+                name="Mycar"
+                component={Mycar}           
             />
         </Stack.Navigator>
 

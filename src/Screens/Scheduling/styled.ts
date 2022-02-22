@@ -25,10 +25,10 @@ export const Header = styled.View`
 `;
 
 export const Title = styled.Text`
-color:${({theme}) => theme.colors.shape};
-font-family:${({theme}) => theme.fonts.secondary_600};
-font-size:${RFValue(34)}px
-text-align:justify;
+    color:${({theme}) => theme.colors.shape};
+    font-family:${({theme}) => theme.fonts.secondary_600};
+    font-size:${RFValue(34)}px
+    text-align:justify;
 `;
 
 export const RentalPeriod = styled.View`
