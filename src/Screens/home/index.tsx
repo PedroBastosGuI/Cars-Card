@@ -82,7 +82,7 @@ const [loading, setLoading] = React.useState(true);
             width={108}
             height={12} 
           />
-          <Title>Total de 12 carros</Title>
+          <Title>Total de {cars.length}</Title>
       </HeaderContent>
     </Header>
       {loading ? <Load/> : 

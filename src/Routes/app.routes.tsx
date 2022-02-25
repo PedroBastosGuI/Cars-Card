@@ -12,6 +12,7 @@ import { SchedulingDetails } from '../Screens/SchedulingDetails';
 import { SchedulingComplete } from '../Screens/SchedulingComplete';
 import { CarDTO } from '../dtos/CarDTO';
 import { Mycar } from '../Screens/Mycar';
+import { Splash } from '../Screens/Splash';
 
 
 export type RootStackParamsList ={ 
@@ -47,7 +48,12 @@ export function AppRoutes() {
                    headerShown:false,
                }
            }
+           initialRouteName="Splash"
         >
+             <Stack.Screen 
+                name="Splash"
+                component={Splash}           
+            />
             <Stack.Screen 
                 name="Home"
                 component={Home}           

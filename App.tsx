@@ -1,7 +1,7 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import theme from './src/style/global/theme';
-
+import {StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native'
 
 import {
@@ -41,6 +41,10 @@ export default function App() {
   return (
   
   <ThemeProvider theme={theme}>
+    <StatusBar
+      translucent
+      barStyle="light-content"
+    />
     <NavigationContainer>
       <AppRoutes/>
     </NavigationContainer>

@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import {TouchableOpacity} from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
-export const Container = styled.View`;
+export const Container = styled.View`
   flex:1;
 `;
 
