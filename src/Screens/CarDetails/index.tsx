@@ -17,7 +17,6 @@ import {
    Container,
    Header,
    CarImages,
-   Content,
    Details,
    Brand,
    Name,
@@ -32,7 +31,8 @@ import {
 import { Button } from '../../Components/Button';
 import { CarDTO } from '../../dtos/CarDTO';
 import { getAcessoryIcon } from '../../utils/getAcessoryIcon';
-
+import Animated, {useSharedValue,useAnimatedScrollHandler, useAnimatedStyle, interpolate, Extrapolate} from 'react-native-reanimated';
+import { StatusBar } from 'expo-status-bar';
 
 // para poder desesturutura
 
@@ -48,13 +48,33 @@ export function CarDetails(){
    //desestruturando
    const {car}  = route.params as Params
 
+   const scrollY = useSharedValue(0)
+   const scrollHandle =useAnimatedScrollHandler(event => {
+      scrollY.value = event.contentOffset.y
+      console.log(event.contentOffset.y)
+   })
 
+   const headerStyledAnimated = useAnimatedStyle(() => {
+      return {
+         height: interpolate(
+            scrollY.value,
+            [0,200],
+            [200, 70],
+            Extrapolate.CLAMP
+         ),
+      }
+   })
    function handleConfirmRental(){
       navigation.navigate('Scheduling', {car});
    }
 
    return(
  <Container>
+    <StatusBar 
+    translucent
+    backgroundColor = "transparent"
+    style='dark'
+    />
      <Header>
         <ButtonBack
             onPress={() => navigation.navigate('Home')}
@@ -66,7 +86,14 @@ export function CarDetails(){
          />
      </CarImages>
 
-      <Content>
+      <Animated.ScrollView
+         contentContainerStyle={{
+            paddingHorizontal:24,
+         }}
+      showsVerticalScrollIndicator={false}
+      onScroll={scrollHandle}
+      style={[headerStyledAnimated]}
+      >
          <Details>
             <Descripition>
                <Brand>{car.brand}</Brand>
@@ -94,9 +121,11 @@ export function CarDetails(){
 
          <Abouat>
             {car.about}
+           
+
          </Abouat>
 
-      </Content>
+      </Animated.ScrollView>
 
       <Footer>
          <Button
