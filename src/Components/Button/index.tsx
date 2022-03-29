@@ -9,12 +9,14 @@ import {
 interface Props extends TouchableOpacityProps{
     title: string;
     color?:string;
+    light?: boolean;
 
 }
 
 export function Button({
     title,
     color,
+    light=false,
     ...rest
 }:Props){
   return(
@@ -22,7 +24,9 @@ export function Button({
         {...rest}
         color={color}
     >
-        <Title>{title}</Title>
+        <Title
+        light={light}
+        >{title}</Title>
     </Container>
 );
 }

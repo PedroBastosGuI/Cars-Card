@@ -4,7 +4,7 @@ interface IndexProps{
     active: boolean;
 }
 
-export const Container = styled.View`;
+export const Container = styled.View`
     width:100%;
 `;
 
