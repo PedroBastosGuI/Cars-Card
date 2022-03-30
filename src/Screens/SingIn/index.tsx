@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {Button} from '../../Components/Button'
 
@@ -6,7 +6,8 @@ import {
     StatusBar,
     KeyboardAvoidingView,
     TouchableWithoutFeedback,
-    Keyboard
+    Keyboard,
+    Alert
 } from 'react-native';
 
 import {
@@ -20,8 +21,37 @@ import {
 import theme from '../../style/global/theme';
 import { Input } from '../../Components/Input';
 import { PasswordInput } from '../../Components/PasswordInput';
+import * as Yup from 'yup';
 
 export function SingIn(){
+    const [email,setEmail] = useState('');
+    const [password,setPassword] = useState('');
+
+
+    async function handleSignIn() {
+        try{
+
+            const schema = Yup.object().shape({
+                email: Yup.string()
+                .required('E-mail obrigatório')
+                .email('Digite um e-mail válido'),
+        
+                password: Yup.string()
+                .required('Senha é obrigatório')
+            });
+    
+            await schema.validate({ email, password });
+
+        }catch(err){
+            if(err instanceof Yup.ValidationError){
+                Alert.alert('Opa', err.message);
+            } else {
+                Alert.alert('Error', 'Ocorreu um erro ao fazer login, verifique as credenciais')
+            }
+        }
+    }
+   
+
   return (
 
     <KeyboardAvoidingView behavior='position' enabled>
@@ -52,11 +82,15 @@ export function SingIn(){
                         keyboardType='email-address'
                         autoCorrect={false}
                         autoCapitalize="none"
+                        onChangeText={setEmail}
+                        value={email}
                     />
 
                     <PasswordInput
                     iconName="lock"
                     placeholder='Senha'
+                    onChangeText={setPassword}
+                    value={password}
                     />
                 </Forms>
 
@@ -64,7 +98,7 @@ export function SingIn(){
                 <Buttons>
                     <Button
                         title='Login'
-                        onPress={() => {}}
+                        onPress={handleSignIn}
                     />
 
                 <Button

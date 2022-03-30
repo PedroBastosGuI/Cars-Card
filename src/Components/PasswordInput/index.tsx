@@ -10,17 +10,35 @@ import {
 import { TextInputProps } from 'react-native';
 
 
-
 interface InputProps extends TextInputProps{
-  iconName:React.ComponentProps<typeof Feather>['name']
+  iconName:React.ComponentProps<typeof Feather>['name'];
+  value?:string;
 }
 
 export function PasswordInput(
-  {iconName,  ...rest
+  {iconName,value,  ...rest
   }:InputProps
 ){
 
+
+
+
   const[isPasswordVisible, setIsPasswordVisible] = useState(true);
+
+  const [isFocus,setIsFocus] = useState(false);
+  const [isFilled,setIsFilled] = useState(false);
+
+  
+  function handleIsFocused(){
+    setIsFocus(true) 
+  };
+
+  function handleIsFilled(){
+    setIsFocus(false);
+    //setar um valor de forma logica 
+    setIsFilled(!!value);
+  };
+
 
 
   function ShowPassword() {
@@ -29,20 +47,23 @@ export function PasswordInput(
 
   const theme =  useTheme();
 
-
   return (
-    <Container>
+    <Container
+        isFocus={isFocus}
+    >
 
     <IconContainer>
       <Feather
         size={24}
         name={iconName}
-        color={theme.colors.text_detail}
+        color={(isFocus || isFilled) ? theme.colors.main : theme.colors.text_detail}
       />
     </IconContainer>
 
       <InputText
         {...rest}
+        onFocus={handleIsFocused}
+        onBlur={handleIsFilled}
         secureTextEntry={isPasswordVisible}
       />
 
@@ -54,6 +75,7 @@ export function PasswordInput(
             size={24}
             name={isPasswordVisible ? 'eye' : 'eye-off'}
             color={theme.colors.text_detail}
+
           />
         </IconContainer>
       </ChangePasswordVisibilityButton>
