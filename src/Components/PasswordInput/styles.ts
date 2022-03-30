@@ -10,7 +10,9 @@ export const Container = styled.View<ContainerProps>`
     ${({isFocus,theme}) => isFocus && css`
         border-bottom-width:2px;
         border-bottom-color:${theme.colors.main};
-    `}
+    `};
+
+    margin-bottom: 6px;
 `;
 
 export const IconContainer = styled.View`

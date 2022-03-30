@@ -19,6 +19,8 @@ import AppLoading from 'expo-app-loading';
 import { LogBox } from 'react-native';
 import { AppRoutes } from './src/Routes/app.routes';
 import { SingIn } from './src/Screens/SingIn';
+import { SingUpFristStep } from './src/Screens/SingUp/SingUpFristStep';
+import { SingUpSecondStep } from './src/Screens/SingUp/SingUpSecondStep';
 
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you\'re using an old API with gesture components, check out new Gestures system!",
@@ -47,7 +49,7 @@ export default function App() {
       barStyle="light-content"
     />
     <NavigationContainer>
-      <SingIn/>
+      <SingUpSecondStep/>
     </NavigationContainer>
   </ThemeProvider>
    

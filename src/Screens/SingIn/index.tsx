@@ -52,6 +52,10 @@ export function SingIn(){
     }
    
 
+    function handleNavigateAccount(){
+
+    }
+
   return (
 
     <KeyboardAvoidingView behavior='position' enabled>
@@ -105,7 +109,7 @@ export function SingIn(){
                         title='Criar conta gratuita'
                         color={theme.colors.background_secondary}
                         light // como é um boolean o padrao é true
-                        onPress={() => {}}
+                        onPress={handleNavigateAccount}
                     />
                 </Buttons>
             </Container>

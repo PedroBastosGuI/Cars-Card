@@ -13,6 +13,7 @@ import { SchedulingComplete } from '../Screens/SchedulingComplete';
 import { CarDTO } from '../dtos/CarDTO';
 import { Mycar } from '../Screens/Mycar';
 import { Splash } from '../Screens/Splash';
+import { SingUpSecondStep } from '../Screens/SingUp/SingUpSecondStep';
 
 
 export type RootStackParamsList ={ 
@@ -22,7 +23,7 @@ export type RootStackParamsList ={
     Scheduling:undefined;
     SchedulingDetails:undefined;
     SchedulingComplete:undefined;
-   
+    SingUpSecondStep:{};
 
 }
 
@@ -50,6 +51,10 @@ export function AppRoutes() {
            }
            initialRouteName="Splash"
         >
+
+
+
+
              <Stack.Screen 
                 name="Splash"
                 component={Splash}           
@@ -57,6 +62,11 @@ export function AppRoutes() {
             <Stack.Screen 
                 name="Home"
                 component={Home}           
+            />
+
+        <Stack.Screen 
+                name="SingUpSecondStep"
+                component={SingUpSecondStep}           
             />
 
             <Stack.Screen 

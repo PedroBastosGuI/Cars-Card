@@ -19,10 +19,21 @@ import { RootStackParamsList } from '../../Routes/app.routes';
 
 interface PropsRoot extends NativeStackNavigationProp<RootStackParamsList,'SchedulingComplete'>{}
 
-export function SchedulingComplete(){
+
+interface Props{
+    title: string;
+    message: string;
+    nextScreenRoute: string;
+}
+export function SchedulingComplete({title,message,nextScreenRoute}:Props){
     const {width}  = useWindowDimensions();
     
     const navigation = useNavigation<PropsRoot>();
+
+
+    function handleNavigation(){
+        navigation.navigate(nextScreenRoute)
+    }
 
   return(
 
@@ -35,19 +46,17 @@ export function SchedulingComplete(){
      <Content>
          <DoneSvg width={80} height={80}/>
 
-         <Title>Carro alugado!</Title>
+         <Title>{title}</Title>
 
          <Message>
-             Agora você so precisa ir {'\n'}
-             até a concessionária de RENTX {'\n'}
-             pegar o seu automóvel.
+             {message}
          </Message>
      </Content>
 
         <Footer>
             <ConfirmButton
                 title="Ok"
-                onPress={() => navigation.navigate('Home')}
+                onPress={handleNavigation}
 
             />
         </Footer>
