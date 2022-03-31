@@ -29,7 +29,7 @@ export function SingUpFristStep(){
 
   const [name,setName] = useState('');
   const [email,setEmail] = useState('');
-  const [cnh,setCnh] = useState('');
+  const [driverLicense,setDriverLicense] = useState('');
 
 
   function handleGoBack(){
@@ -48,11 +48,11 @@ export function SingUpFristStep(){
         .email('E-mail inválido')
         .required('E-mail é obrigatorio'),
 
-        cnh:Yup.string()
+        driverLicense:Yup.string()
         .required('CNH é obrigatorio')
       })
 
-      const data  = {name,email,cnh};
+      const data  = {name,email,driverLicense};
 
       await schema.validate(data);
      navigation.navigate('SingUpSecondStep',{user:data})
@@ -126,8 +126,8 @@ export function SingUpFristStep(){
             iconName='credit-card'
             placeholder="CNH"
             keyboardType='numeric'
-            value={cnh}
-            onChangeText={setCnh}
+            value={driverLicense}
+            onChangeText={setDriverLicense}
 
           />
           

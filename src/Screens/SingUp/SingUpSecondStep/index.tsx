@@ -21,6 +21,7 @@ import {useNavigation,useRoute} from '@react-navigation/native';
 
 import { RootStackParamsList } from '../../../Routes/app.routes';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import { api } from '../../../services/api';
 
 interface PropsRoot extends NativeStackNavigationProp<RootStackParamsList,'SingUpSecondStep'>{}
 
@@ -28,7 +29,7 @@ interface Params{
   user:{
     name:string;
     email:string;
-    cnh:string;
+    driverLicense:string;
   }
 };
 
@@ -42,11 +43,11 @@ export function SingUpSecondStep(){
   const[passwordConfirm, setPasswordConfirm] = useState('');
 
 
-  function handleGoBack(){
+   function handleGoBack(){
       navigation.navigate('SingUpFristStep')
   };
 
-  function handleRgister(){
+  async function handleRgister(){
     if(!password || !passwordConfirm){
          return Alert.alert('Campo vazio','Preencha os campos corretamente')
     };
@@ -55,12 +56,28 @@ export function SingUpSecondStep(){
       return Alert.alert('Senhas nao confere','Preencha os campos corretamente')
     };
 
-    navigation.navigate('SchedulingComplete',{data:{
-      nextScreenRoute:'SingIn',
-      message:`Agora é só fazer login ${'\n'}e aproveitar`,
-      title:'Conta criada!'
+   
 
-    }})
+     await api.post('/users',{
+        name:user.name,
+        email:user.email,
+        driver_license:user.driverLicense,
+        password
+    })
+    .then(() => {
+        navigation.navigate('SchedulingComplete',{data:{
+          nextScreenRoute:'SingIn',
+          message:`Agora é só fazer login ${'\n'}e aproveitar`,
+          title:'Conta criada!'  
+        }
+      });
+    })
+    .catch((error) => {
+      Alert.alert('Error', 'falha ao conectar ao servidor');
+      console.log(error);
+    })
+
+  
     
   }
 

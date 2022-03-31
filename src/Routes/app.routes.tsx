@@ -38,7 +38,7 @@ export type RootStackParamsList ={
         user: { 
           name: string; 
           email: string; 
-          cnh: string; 
+          driverLicense: string; 
         };
       };
 }
