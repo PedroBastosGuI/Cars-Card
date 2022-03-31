@@ -17,25 +17,33 @@ import {
 import { Button } from '../../../Components/Button';
 import { PasswordInput } from '../../../Components/PasswordInput';
 import theme from '../../../style/global/theme';
-import {useRoute} from '@react-navigation/native';
+import {useNavigation,useRoute} from '@react-navigation/native';
+
+import { RootStackParamsList } from '../../../Routes/app.routes';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+
+interface PropsRoot extends NativeStackNavigationProp<RootStackParamsList,'SingUpSecondStep'>{}
 
 interface Params{
-  name:string;
-  email:string;
-  cnh:string;
-}
+  user:{
+    name:string;
+    email:string;
+    cnh:string;
+  }
+};
 
 export function SingUpSecondStep(){
 
-  //const route = useRoute();
-  //const{} = route.params as Params 
-
+  const route = useRoute();
+  const navigation = useNavigation<PropsRoot>();
+  const{user} = route.params as Params
+  console.log(user)
   const[password, setPassword] = useState('');
   const[passwordConfirm, setPasswordConfirm] = useState('');
 
 
   function handleGoBack(){
-
+      navigation.navigate('SingUpFristStep')
   };
 
   function handleRgister(){
@@ -45,7 +53,15 @@ export function SingUpSecondStep(){
 
     if(password != passwordConfirm){
       return Alert.alert('Senhas nao confere','Preencha os campos corretamente')
- }
+    };
+
+    navigation.navigate('SchedulingComplete',{data:{
+      nextScreenRoute:'SingIn',
+      message:`Agora é só fazer login ${'\n'}e aproveitar`,
+      title:'Conta criada!'
+
+    }})
+    
   }
 
   return (
@@ -99,9 +115,7 @@ export function SingUpSecondStep(){
               placeholder='Confirmar Senha'
               onChangeText={setPasswordConfirm}
               value={passwordConfirm}
-            />
-
-          
+            />         
         </Forms>
             
         <Footer>

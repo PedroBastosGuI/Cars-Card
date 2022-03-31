@@ -23,7 +23,12 @@ import { Input } from '../../Components/Input';
 import { PasswordInput } from '../../Components/PasswordInput';
 import * as Yup from 'yup';
 
+import {useNavigation} from '@react-navigation/native'
+
 export function SingIn(){
+
+    const navigation = useNavigation();
+
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
 
@@ -41,6 +46,7 @@ export function SingIn(){
             });
     
             await schema.validate({ email, password });
+            navigation.navigate('Home');
 
         }catch(err){
             if(err instanceof Yup.ValidationError){
@@ -53,6 +59,7 @@ export function SingIn(){
    
 
     function handleNavigateAccount(){
+        navigation.navigate('SingUpFristStep');
 
     }
 

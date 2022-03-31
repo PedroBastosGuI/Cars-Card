@@ -49,7 +49,7 @@ export default function App() {
       barStyle="light-content"
     />
     <NavigationContainer>
-      <SingUpSecondStep/>
+      <AppRoutes/>
     </NavigationContainer>
   </ThemeProvider>
    

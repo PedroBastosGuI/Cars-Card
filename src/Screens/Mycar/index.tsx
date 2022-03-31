@@ -15,6 +15,12 @@ AppointmentsNumber,
 } from './styled';
 import {useNavigation} from '@react-navigation/native';
 
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import { RootStackParamsList } from '../../Routes/app.routes';
+
+
+interface PropsRoot extends NativeStackNavigationProp<RootStackParamsList,'SchedulingComplete'>{}
+
 import {Cars} from '../../Components/Cars';
 
 interface CarProps{
@@ -27,13 +33,13 @@ interface CarProps{
 export function Mycar(){
 
 
-    const navigation = useNavigation();
+    const navigation = useNavigation<PropsRoot>();
     const [cars, setCars] = React.useState<CarProps[]>([]);
     const[loading, setLoading] = React.useState(true);
 
 
     function handleGoBack() {
-        navigation.goBack('Home');
+        navigation.navigate('Home');
     }
 
     React.useEffect(()=>{

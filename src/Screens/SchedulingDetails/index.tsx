@@ -85,13 +85,18 @@ export function SchedulingDetails(){
       id:car.id,
       unavailable_dates
    })
-   .then(() =>  navigation.navigate('SchedulingComplete'))
+   .then(() =>  navigation.navigate('SchedulingComplete',{data:{
+      message:`Agora você só precisa ir\natá a concessionária da RENTX\npegar seu automóvel.`,
+      title:'Carro alugado!',
+      nextScreenRoute:'Home'
+
+   }}))
    .catch (() => Alert.alert('Não foi possivél carregar o pedido'))
 
 
    };
    function handleGoBack(){
-      navigation.goBack('Scheduling');
+      navigation.navigate('Scheduling');
    }
 
    React.useEffect(() => {

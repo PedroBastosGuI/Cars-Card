@@ -89,6 +89,7 @@ const [loading, setLoading] = React.useState(true);
 
   function handleOpenMycars() {
     //para passar as informaçoes
+    navigation.navigate('Mycar')
   }
 
  React.useEffect(()=>{

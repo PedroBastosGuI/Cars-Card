@@ -20,7 +20,7 @@ import * as Yup from 'yup';
 import { RootStackParamsList } from '../../../Routes/app.routes';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
-interface PropsRoot extends NativeStackNavigationProp<RootStackParamsList,'SchedulingComplete'>{}
+interface PropsRoot extends NativeStackNavigationProp<RootStackParamsList,'SingUpSecondStep'>{}
 
 
 export function SingUpFristStep(){
@@ -33,7 +33,7 @@ export function SingUpFristStep(){
 
 
   function handleGoBack(){
-
+      navigation.navigate('SingIn')
   };
 
 
@@ -55,7 +55,7 @@ export function SingUpFristStep(){
       const data  = {name,email,cnh};
 
       await schema.validate(data);
-     // navigation.navigate('SingUpSecondStep', {user:data})
+     navigation.navigate('SingUpSecondStep',{user:data})
 
     }catch(error){
 

@@ -14,32 +14,35 @@ import { CarDTO } from '../dtos/CarDTO';
 import { Mycar } from '../Screens/Mycar';
 import { Splash } from '../Screens/Splash';
 import { SingUpSecondStep } from '../Screens/SingUp/SingUpSecondStep';
+import { SingUpFristStep } from '../Screens/SingUp/SingUpFristStep';
+import { SingIn } from '../Screens/SingIn';
 
 
 export type RootStackParamsList ={ 
     Home:undefined;
+    Mycar: undefined;
     //quando passa vai passar um parametro entre screens
     CarDetails:{car:CarDTO};
     Scheduling:undefined;
     SchedulingDetails:undefined;
-    SchedulingComplete:undefined;
-    SingUpSecondStep:{};
-
+    SchedulingComplete:{
+        data:{
+            title:string;
+            message:string;
+            nextScreenRoute: 'SingIn'|'Home';
+        }
+    };
+    SingUpFristStep:undefined;
+    SingIn:undefined;
+    SingUpSecondStep:{ 
+        user: { 
+          name: string; 
+          email: string; 
+          cnh: string; 
+        };
+      };
 }
-
-
-
-
-
-
-
-
-
 const Stack = createNativeStackNavigator();
-
-
-
-
 
 export function AppRoutes() {
     return(
@@ -52,22 +55,32 @@ export function AppRoutes() {
            initialRouteName="Splash"
         >
 
+        <Stack.Screen 
+                name="SingIn"
+                component={SingIn}           
+            />
 
-
-
+        <Stack.Screen 
+                name="SingUpFristStep"
+                component={SingUpFristStep}           
+            />
              <Stack.Screen 
                 name="Splash"
                 component={Splash}           
+            />
+
+           
+
+            <Stack.Screen 
+                name="SingUpSecondStep"
+                component={SingUpSecondStep}           
             />
             <Stack.Screen 
                 name="Home"
                 component={Home}           
             />
 
-        <Stack.Screen 
-                name="SingUpSecondStep"
-                component={SingUpSecondStep}           
-            />
+        
 
             <Stack.Screen 
                 name="CarDetails"
@@ -95,3 +108,5 @@ export function AppRoutes() {
 
     );
 }
+
+SingUpFristStep

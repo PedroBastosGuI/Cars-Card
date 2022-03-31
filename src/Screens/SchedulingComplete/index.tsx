@@ -12,7 +12,7 @@ Message,
 Footer
 } from './styled'
 import { ConfirmButton } from '../../Components/ConfirmButton';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import { RootStackParamsList } from '../../Routes/app.routes';
 
@@ -20,19 +20,22 @@ import { RootStackParamsList } from '../../Routes/app.routes';
 interface PropsRoot extends NativeStackNavigationProp<RootStackParamsList,'SchedulingComplete'>{}
 
 
-interface Props{
-    title: string;
-    message: string;
-    nextScreenRoute: string;
+interface Params{
+   data:
+    {title: string;
+        message: string;
+        nextScreenRoute: 'SingIn' | 'Home'}
 }
-export function SchedulingComplete({title,message,nextScreenRoute}:Props){
+export function SchedulingComplete(){
     const {width}  = useWindowDimensions();
-    
+    const route = useRoute()
+    const {data} = route.params as Params
+    console.log(data)
     const navigation = useNavigation<PropsRoot>();
 
 
     function handleNavigation(){
-        navigation.navigate(nextScreenRoute)
+        navigation.navigate(data.nextScreenRoute)
     }
 
   return(
@@ -46,10 +49,10 @@ export function SchedulingComplete({title,message,nextScreenRoute}:Props){
      <Content>
          <DoneSvg width={80} height={80}/>
 
-         <Title>{title}</Title>
+         <Title>{data.title}</Title>
 
          <Message>
-             {message}
+             {data.message}
          </Message>
      </Content>
 
