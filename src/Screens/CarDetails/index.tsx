@@ -35,6 +35,7 @@ import Animated, {useSharedValue,useAnimatedScrollHandler, useAnimatedStyle, int
 import { StatusBar } from 'expo-status-bar';
 
 // para poder desesturutura
+interface PropsRoot extends NativeStackNavigationProp<RootStackParamsList,'SingIn'>{};
 
 interface Params{
    car: CarDTO;
@@ -42,7 +43,7 @@ interface Params{
 
 export function CarDetails(){
 
-   const navigation = useNavigation();
+   const navigation = useNavigation<PropsRoot>();
    //para pegar a informação
    const route = useRoute();
    //desestruturando
@@ -103,8 +104,8 @@ export function CarDetails(){
          
 
          <Rent>
-            <Period>{car.rent.period}</Period>
-            <Price> R$ {car.rent.price}</Price>
+            <Period>{car.period}</Period>
+            <Price> R$ {car.price}</Price>
          </Rent>
          </Details>
 

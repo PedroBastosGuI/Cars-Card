@@ -21,9 +21,10 @@ import { SingIn } from '../Screens/SingIn';
 export type RootStackParamsList ={ 
     Home:undefined;
     Mycar: undefined;
+    Splash:undefined;
     //quando passa vai passar um parametro entre screens
     CarDetails:{car:CarDTO};
-    Scheduling:undefined;
+    Scheduling:{car:CarDTO};
     SchedulingDetails:undefined;
     SchedulingComplete:{
         data:{

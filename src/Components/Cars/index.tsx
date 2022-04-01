@@ -17,21 +17,12 @@ TitleValue,
 Type,
 CarImage,
 } from './styled';
+import { CarDTO } from '../../dtos/CarDTO';
 
-interface CarData {
-    brand: string;
-    name: string;
-    rent:{
-        period: string;
-        price: number;
-    },
-
-    thumbnail: string;
-};
 
 
 interface Props extends TouchableOpacityProps{
-  data:CarData
+  data:CarDTO
 }
 
 
@@ -51,8 +42,8 @@ export function Cars({data,...rest}:Props){
                 
                     <ValueContent>
                         
-                        <TitleValue>{data.rent.period}</TitleValue>
-                        <Price>{`R$ ${data.rent.price}`}</Price>
+                        <TitleValue>{data.period}</TitleValue>
+                        <Price>{`R$ ${data.price}`}</Price>
                     </ValueContent>
 
                     <Type>

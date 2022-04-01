@@ -23,11 +23,21 @@ import { Input } from '../../Components/Input';
 import { PasswordInput } from '../../Components/PasswordInput';
 import * as Yup from 'yup';
 
-import {useNavigation} from '@react-navigation/native'
+import {useNavigation} from '@react-navigation/native';
+
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import { RootStackParamsList } from '../../Routes/app.routes';
+
+
+interface PropsRoot extends NativeStackNavigationProp<RootStackParamsList,'SingIn'>{};
+
+import {useAuth} from '../../hooks/auth'
 
 export function SingIn(){
 
-    const navigation = useNavigation();
+    const navigation = useNavigation<PropsRoot>();
+
+    const {signIn} = useAuth();
 
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
@@ -47,6 +57,7 @@ export function SingIn(){
     
             await schema.validate({ email, password });
             navigation.navigate('Home');
+            signIn({email, password});
 
         }catch(err){
             if(err instanceof Yup.ValidationError){

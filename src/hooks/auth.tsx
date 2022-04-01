@@ -51,11 +51,18 @@ function AuthProvider({children} :AuthProviderProps){
 
     async function signIn({email, password}:SingInCredentials){
         // fazer um request de
-        const response =  api.post('/sessions', {
+        const response = await api.post('/sessions', {
             email,
             password
         });
-        console.log((await response).data)
+        const {token,user} = response.data;
+        //injetando o token no header da request de
+        api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        setData({token,user});
+
+
+        console.log(data)
+
     }
     return(
         <AuthContext.Provider

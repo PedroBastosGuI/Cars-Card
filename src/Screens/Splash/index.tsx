@@ -6,14 +6,20 @@ import {useNavigation} from '@react-navigation/native';
 import Animated,{useSharedValue,useAnimatedStyle, withTiming,interpolate,Extrapolate, runOnJS} from 'react-native-reanimated';
 import {Button, StyleSheet, Dimensions} from 'react-native';
 
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import { RootStackParamsList } from '../../Routes/app.routes';
+
+
+interface PropsRoot extends NativeStackNavigationProp<RootStackParamsList,'Splash'>{};
 
 import {
   Container
 } from './styles';
 
 export function Splash(){
+  
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<PropsRoot>();
   // usar as tags do Animated
 
   const splashAnimation = useSharedValue(0);
@@ -60,7 +66,7 @@ export function Splash(){
 
   function startApp(){
     navigation.navigate('SingIn')
-  }
+  };
 
   React.useEffect(() => {
     splashAnimation.value = withTiming(
