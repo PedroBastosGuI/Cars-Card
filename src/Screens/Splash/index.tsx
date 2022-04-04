@@ -7,7 +7,7 @@ import Animated,{useSharedValue,useAnimatedStyle, withTiming,interpolate,Extrapo
 import {Button, StyleSheet, Dimensions} from 'react-native';
 
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import { RootStackParamsList } from '../../Routes/app.routes';
+import { RootStackParamsList } from '../../Routes/app.stacks.routes';
 
 
 interface PropsRoot extends NativeStackNavigationProp<RootStackParamsList,'Splash'>{};

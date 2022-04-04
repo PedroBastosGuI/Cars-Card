@@ -17,7 +17,7 @@ import {
 import { Input } from '../../../Components/Input';
 import { Button } from '../../../Components/Button';
 import * as Yup from 'yup';
-import { RootStackParamsList } from '../../../Routes/app.routes';
+import {RootStackParamsList} from '../../../Routes/app.stacks.routes';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 interface PropsRoot extends NativeStackNavigationProp<RootStackParamsList,'SingUpSecondStep'>{}
@@ -55,7 +55,7 @@ export function SingUpFristStep(){
       const data  = {name,email,driverLicense};
 
       await schema.validate(data);
-     navigation.navigate('SingUpSecondStep',{user:data})
+      navigation.navigate('SingUpSecondStep',{user:data})
 
     }catch(error){
 

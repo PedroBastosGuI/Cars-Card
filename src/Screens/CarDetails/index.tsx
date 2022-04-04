@@ -11,7 +11,7 @@ import exchance from "../../assets/exchange.svg";
 import people from "../../assets/people.svg";
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import { RootStackParamsList } from '../../Routes/app.routes';
+import { RootStackParamsList } from '../../Routes/app.stacks.routes';
 
 import {
    Container,

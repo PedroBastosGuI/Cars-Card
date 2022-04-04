@@ -26,7 +26,7 @@ import * as Yup from 'yup';
 import {useNavigation} from '@react-navigation/native';
 
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import { RootStackParamsList } from '../../Routes/app.routes';
+import { RootStackParamsList } from '../../Routes/app.stacks.routes';
 
 
 interface PropsRoot extends NativeStackNavigationProp<RootStackParamsList,'SingIn'>{};

@@ -37,7 +37,7 @@ import {
 import { Button } from '../../Components/Button';
 
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import { RootStackParamsList } from '../../Routes/app.routes';
+import { RootStackParamsList } from '../../Routes/app.stacks.routes';
 import { CarDTO } from '../../dtos/CarDTO';
 import { getPlataformDate } from '../../utils/getPlataformDate';
 import {format} from 'date-fns';
@@ -63,7 +63,7 @@ export function SchedulingDetails(){
    const route = useRoute();
    const {car, dates}  = route.params as Params;
 
-   const rendalTotal = Number(dates.length * car.rent.price);
+   const rendalTotal = Number(dates.length * car.price);
 
 
    //enviar dados para API
@@ -130,8 +130,8 @@ export function SchedulingDetails(){
          
 
          <Rent>
-            <Period>{car.rent.period}</Period>
-            <Price>R$ {car.rent.price}</Price>
+            <Period>{car.period}</Period>
+            <Price>R$ {car.price}</Price>
          </Rent>
          </Details>
 
@@ -177,7 +177,7 @@ export function SchedulingDetails(){
          <RentalPrice>
             <RentalPriceLabel>TOTAL</RentalPriceLabel>
             <RentalPriceDetails>
-               <RentalPriceDetailsOuota>{`R$ ${car.rent.price} x ${dates.length} diárias`}</RentalPriceDetailsOuota>
+               <RentalPriceDetailsOuota>{`R$ ${car.price} x ${dates.length} diárias`}</RentalPriceDetailsOuota>
                <RentalPriceTotal>R$ {rendalTotal}</RentalPriceTotal>
             </RentalPriceDetails>
          </RentalPrice>

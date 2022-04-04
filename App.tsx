@@ -2,7 +2,6 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import theme from './src/style/global/theme';
 import {StatusBar} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native'
 
 import {
   useFonts,
@@ -17,8 +16,8 @@ import {
 
 import AppLoading from 'expo-app-loading';
 import { LogBox } from 'react-native';
-import { AppRoutes } from './src/Routes/app.routes';
 import {AppProvider} from './src/hooks';
+import { Routes } from './src/Routes';
 
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you\'re using an old API with gesture components, check out new Gestures system!",
@@ -46,11 +45,9 @@ export default function App() {
       translucent
       barStyle="light-content"
     />
-    <NavigationContainer>
       <AppProvider>
-        <AppRoutes/>
+        <Routes/>
       </AppProvider>
-    </NavigationContainer>
   </ThemeProvider>
    
   );

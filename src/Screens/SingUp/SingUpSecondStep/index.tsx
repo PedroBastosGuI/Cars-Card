@@ -19,7 +19,7 @@ import { PasswordInput } from '../../../Components/PasswordInput';
 import theme from '../../../style/global/theme';
 import {useNavigation,useRoute} from '@react-navigation/native';
 
-import { RootStackParamsList } from '../../../Routes/app.routes';
+import {RootStackParamsList} from '../../../Routes/app.stacks.routes';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import { api } from '../../../services/api';
 

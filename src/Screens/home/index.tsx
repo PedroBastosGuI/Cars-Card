@@ -1,19 +1,14 @@
 import {useNavigation} from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import {Ionicons} from '@expo/vector-icons';
-
-
 
 import LogoSVG  from '../../assets/logo.svg'
 import { Cars } from '../../Components/Cars';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import { RootStackParamsList } from '../../Routes/app.routes';
-import {PanGestureHandler} from 'react-native-gesture-handler';
+import {RootStackParamsList} from '../../Routes/app.stacks.routes';
 import {api} from '../../services/api';
 import {CarDTO} from '../../dtos/CarDTO';
-import {TouchableOpacity,StyleSheet, BackHandler} from 'react-native';
-
+import {TouchableOpacity} from 'react-native';
 
 import {
   Container,
@@ -21,9 +16,7 @@ import {
   HeaderContent,
   Title,
   Carlist,
-  MyCarsButtons
 } from './styled';
-import { Alert } from 'react-native';
 import { Load } from '../../Components/Load';
 import { useTheme } from 'styled-components/native';
 import Animated,{useSharedValue, useAnimatedStyle,useAnimatedGestureHandler, withSpring} from 'react-native-reanimated';
@@ -87,11 +80,6 @@ const [loading, setLoading] = React.useState(true);
     navigation.navigate('CarDetails', {car})
   }
 
-  function handleOpenMycars() {
-    //para passar as informaçoes
-    navigation.navigate('Mycar')
-  }
-
  React.useEffect(()=>{
 
   async function fetchCars() {
@@ -111,12 +99,6 @@ const [loading, setLoading] = React.useState(true);
  },[]);
 
 
- React.useEffect(()=>{
-   BackHandler.addEventListener('hardwareBackPress', () => {
-     return true;
-   })
- },[])
-  
   return(
  <Container>  
      <StatusBar
@@ -146,43 +128,8 @@ const [loading, setLoading] = React.useState(true);
       />
       }
 
-      <PanGestureHandler
-        onGestureEvent={onGestureEvent}
-     >
-        <Animated.View
-          style={[
-          myCarsButtonStyle,
-          {
-            position: 'absolute',
-            bottom:13,
-            right: 22,
-          }
-          ]}
-        
-        >
-          <TouachaButtonAnimeted
-            onPress={handleOpenMycars}
-            style={[style.button, {backgroundColor:theme.colors.main}]}
-          >
-            <Ionicons 
-            name='ios-car-sport'
-            size={32}
-            color={theme.colors.shape}     
-            />
-          </TouachaButtonAnimeted>
-        </Animated.View>
-      </PanGestureHandler>
   </Container>
 );
 }
 
 
-const style = StyleSheet.create({
-  button:{
-    width:60,
-    height:60,
-    borderRadius:30,
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
-});
