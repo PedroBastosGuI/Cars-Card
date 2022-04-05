@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 
-import {Button} from '../../Components/Button'
+import {Button} from '../../Components/Button';
+
+
 
 import {
     StatusBar,
@@ -29,11 +31,17 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import { RootStackParamsList } from '../../Routes/app.stacks.routes';
 
 
+import {database} from '../../databases';
+
+
 interface PropsRoot extends NativeStackNavigationProp<RootStackParamsList,'SingIn'>{};
 
 import {useAuth} from '../../hooks/auth'
 
 export function SingIn(){
+
+
+
 
     const navigation = useNavigation<PropsRoot>();
 
@@ -72,7 +80,18 @@ export function SingIn(){
     function handleNavigateAccount(){
         navigation.navigate('SingUpFristStep');
 
-    }
+    };
+
+
+    useEffect(() => {
+
+        async function loadData() {
+        const users = database.get('users');
+        const test = await users.query().fetch();
+        console.log(test)
+        }
+        loadData();
+    }, [])
 
   return (
 
