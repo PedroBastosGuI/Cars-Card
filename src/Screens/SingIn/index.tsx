@@ -31,22 +31,13 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import { RootStackParamsList } from '../../Routes/app.stacks.routes';
 
 
-import {database} from '../../databases';
-
-
 interface PropsRoot extends NativeStackNavigationProp<RootStackParamsList,'SingIn'>{};
-
-import {useAuth} from '../../hooks/auth'
+import {useAuth} from '../../hooks/auth';
 
 export function SingIn(){
 
-
-
-
     const navigation = useNavigation<PropsRoot>();
-
     const {signIn} = useAuth();
-
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
 
@@ -82,16 +73,6 @@ export function SingIn(){
 
     };
 
-
-    useEffect(() => {
-
-        async function loadData() {
-        const users = database.get('users');
-        const test = await users.query().fetch();
-        console.log(test)
-        }
-        loadData();
-    }, [])
 
   return (
 

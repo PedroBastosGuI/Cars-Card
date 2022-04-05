@@ -82,19 +82,28 @@ const [loading, setLoading] = React.useState(true);
 
  React.useEffect(()=>{
 
+  let isMounted = true;
   async function fetchCars() {
   try{
       const response = await api.get('/cars');
-      setCars(response.data)
+      if(isMounted){
+        setCars(response.data)
+      };
      } catch(error) {
       console.log(error);
   } finally{
-    setLoading(false)
+    if(isMounted){
+      setLoading(false)
+    };
   }
 
   }
 
-  fetchCars()
+  fetchCars();
+//desmontanto o componente 
+  return() => {
+    isMounted = false;
+  }
 
  },[]);
 

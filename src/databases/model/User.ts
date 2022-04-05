@@ -19,6 +19,9 @@ class User extends Model {
     @field('driver_license')
     driver_license!: string;
 
+    @field('avatar')
+    avatar!: string;
+
     @field('token')
     token!: string;
 
