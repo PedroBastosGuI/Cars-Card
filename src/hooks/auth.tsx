@@ -31,7 +31,8 @@ interface SingInCredentials{
 interface AuthContextData{
     user:User;
     signIn: (credentials:SingInCredentials) => Promise<void>;
-    singOut:() => void;
+    singOut:() => Promise<void>;
+    updateUser:(user:User) => Promise<void>;
 };
 
 interface AuthProviderProps{
@@ -97,6 +98,27 @@ function AuthProvider({children} :AuthProviderProps){
         }catch(error:any){
             throw new Error(error)
         }
+    };
+
+    async function updateUser(){
+        try{
+
+            const userCollection = database.get<ModelUser>('users');
+            await database.write(async() => {
+                const userSelected = await userCollection.find(data.id);
+
+                await userSelected.update((userData) => {
+                    userData.name = userData.name,
+                    userData.avatar = userData.avatar,
+                    userData.driver_license= userData.driver_license
+                });
+            });
+
+            setData(data)
+
+        }catch(error:any){
+            throw new Error(error)
+        }
     }
 
     useEffect(() => {
@@ -121,7 +143,8 @@ function AuthProvider({children} :AuthProviderProps){
                 {
                     user:data,
                     signIn,
-                    singOut
+                    singOut,
+                    updateUser
                 }
             }
         >

@@ -1,11 +1,11 @@
 import React from 'react';
 import styled,{css} from 'styled-components/native';
 import {
-    TouchableOpacity
+    TouchableOpacity, View
 } from 'react-native';
 import theme from '../../style/global/theme';
 import { RFValue } from 'react-native-responsive-fontsize';
-
+import {RectButton} from 'react-native-gesture-handler';
 
 
 interface PropsActive{
@@ -61,7 +61,7 @@ export const Photo = styled.Image`
 `;
 
 
-export const CaptureImage = styled(TouchableOpacity)`
+export const CaptureImage = styled.TouchableOpacity`
     background-color:${({theme}) => theme.colors.main};
     width:40px;
     height:40px;
@@ -71,8 +71,6 @@ export const CaptureImage = styled(TouchableOpacity)`
     justify-content: center;
 
     position:absolute;
-    bottom:10px;
-    right:10px;
 `;
 
 

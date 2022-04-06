@@ -19,12 +19,17 @@ import {useNavigation} from '@react-navigation/native';
 import {Feather} from '@expo/vector-icons';
 import { ButtonBack } from '../../Components/ButtonBack';
 import { Input } from '../../Components/Input';
-import {KeyboardAvoidingView, TouchableWithoutFeedback,Keyboard} from 'react-native';
+import {KeyboardAvoidingView, TouchableWithoutFeedback,Keyboard, Alert} from 'react-native';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import { PasswordInput } from '../../Components/PasswordInput';
+import {RectButtonProps} from 'react-native-gesture-handler';
+import * as Yup from  'yup';
+
+interface PropsButton extends RectButtonProps{}
 
 import {useAuth} from '../../hooks/auth';
 import * as ImagePicker from 'expo-image-picker';
+import { Button } from '../../Components/Button';
 
 export function Profile(){
 
@@ -44,14 +49,23 @@ export function Profile(){
         navigation.goBack()
     };
 
-    function handleSinOut(){
-    };
 
     function handleOptionChange(selected: 'dataEdit' | 'passwordEdit'){
         setOption(selected)
     };
 
-
+    async function handleSingOut(){
+        Alert.alert('Tem Certeza?','Lembre-se, ao desconectar irá precisar de internet novamente',[
+            {
+                text:'Cancelar',
+                onPress:() => {},
+           },
+            {
+                text:'Sair',
+                onPress:() => user.singOut(),
+            },
+        ])
+    }
     async function handlePickerImage(){
         const result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes:ImagePicker.MediaTypeOptions.Images,
@@ -67,6 +81,39 @@ export function Profile(){
         if(result.uri){
             setAvatar(result.uri)
         }
+    };
+
+    async function handleUpdated(){
+        try{
+            const schema = Yup.object().shape({
+                driver_license:Yup.string()
+                .required('CNH é obrigatório'),
+                name:Yup.string()
+                .required('Nome é obrigatório'),
+            });
+
+            const data =  {name,driver_license};
+            await schema.validate(data);
+
+            // deu tudo certo 
+
+            await user.updateUser({
+                id: user.user.id,
+                user_id:user.user.user_id,
+                email: user.user.email,
+                driver_license: driver_license,
+                name,
+                avatar,
+                token: user.user.token,
+            });
+
+            Alert.alert("Successo","Alterações realizadas com sucesso")
+        }catch(error){
+            if(error instanceof Yup.ValidationError){
+                Alert.alert('Opa', error.message)
+            }
+            Alert.alert('Error', 'Não foi possivel alterar os dados do perfil.')
+        }
     }
 
     return(
@@ -81,7 +128,7 @@ export function Profile(){
                         />
                         <HeaderTitle>Editar Perfil</HeaderTitle>
                         <LogoutButton 
-                        onPress={user.singOut}
+                        onPress={handleSingOut}
                         >
                             <Feather 
                                 name='power'
@@ -92,10 +139,15 @@ export function Profile(){
                         </LogoutButton>
                     </HeaderTop>
 
-                    <PhotoContainer>
+                    <PhotoContainer
+                    >
                      {!!avatar && <Photo source={{uri:avatar}}/>}
+                     
                         <CaptureImage
+                            
                             onPress={handlePickerImage}
+                           
+
                         >
                             <Feather
                                     name="camera"
@@ -170,6 +222,11 @@ export function Profile(){
                        />
                    </Section>  
                    }
+
+                   <Button
+                        title='Salvar operações'
+                        onPress={handleUpdated}
+                   />
                 </Content>
             </Container>
         </TouchableWithoutFeedback>
