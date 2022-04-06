@@ -46,15 +46,7 @@ export function AppTabNavigation(){
                     )
                 }}
             />
-             <Screen
-                name="Profile"
-                component={Profile}
-                options={{
-                    tabBarIcon: ({ focused, color }) => (
-                      <PersonSvg width={24} height={24} fill={color}/>
-                    )
-                  }}
-            />
+             
              
              <Screen
                 name="Mycar"
@@ -62,6 +54,16 @@ export function AppTabNavigation(){
                 options={{
                     tabBarIcon: ({color}) => (
                       <CarSvg width={24} height={24} fill={color} />
+                    )
+                  }}
+            />
+
+            <Screen
+                name="Profile"
+                component={Profile}
+                options={{
+                    tabBarIcon: ({ focused, color }) => (
+                      <PersonSvg width={24} height={24} fill={color}/>
                     )
                   }}
             />
