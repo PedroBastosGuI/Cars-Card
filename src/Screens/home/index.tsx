@@ -8,7 +8,10 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamsList} from '../../Routes/app.stacks.routes';
 import {api} from '../../services/api';
 import {CarDTO} from '../../dtos/CarDTO';
-import {TouchableOpacity} from 'react-native';
+import {Alert, TouchableOpacity} from 'react-native';
+
+
+import {useNetInfo} from '@react-native-community/netinfo';
 
 import {
   Container,
@@ -73,6 +76,7 @@ const [cars, setCars] = React.useState<CarDTO[]>([]);
 const [loading, setLoading] = React.useState(true);
 
   const navigation = useNavigation<PropsType>();
+  const netInfo = useNetInfo()
 
   //tipando a funçao pra passando informaçoes entre telas
   function handleCarsDetails(car: CarDTO) {
@@ -108,6 +112,13 @@ const [loading, setLoading] = React.useState(true);
  },[]);
 
 
+ React.useEffect(() => {
+  if(netInfo.isConnected){
+    Alert.alert('conectado');
+  }else{
+    Alert.alert('você esta offline');
+  }
+ },[netInfo.isConnected])
   return(
  <Container>  
      <StatusBar

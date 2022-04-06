@@ -36,7 +36,7 @@ export function Profile(){
     const user = useAuth();
 
     const[option, setOption] = useState<'dataEdit' | 'passwordEdit'>('dataEdit');
-    const[avatar, setAvatar] = useState(user.user.avatar);
+    const[avatar, setAvatar] = useState('https://avatars.githubusercontent.com/u/91087463?v=4');
     const[name, setName] = useState(user.user.name);
     const[driver_license, setDriver_licenser] = useState(user.user.driver_license);
     const[email, setEmail] = useState(user.user.email);
@@ -102,8 +102,8 @@ export function Profile(){
                 user_id:user.user.user_id,
                 email: user.user.email,
                 driver_license: driver_license,
-                name,
-                avatar,
+                name:user.user.name,
+                avatar:user.user.avatar,
                 token: user.user.token,
             });
 

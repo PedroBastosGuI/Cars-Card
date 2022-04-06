@@ -65,7 +65,7 @@ export const CaptureImage = styled.TouchableOpacity`
     background-color:${({theme}) => theme.colors.main};
     width:40px;
     height:40px;
-
+    border-radius:20px;
 
     align-items: center;
     justify-content: center;

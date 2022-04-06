@@ -100,12 +100,12 @@ function AuthProvider({children} :AuthProviderProps){
         }
     };
 
-    async function updateUser(){
+    async function updateUser(user:User){
         try{
 
             const userCollection = database.get<ModelUser>('users');
             await database.write(async() => {
-                const userSelected = await userCollection.find(data.id);
+                const userSelected = await userCollection.find(user.id);
 
                 await userSelected.update((userData) => {
                     userData.name = userData.name,
@@ -114,7 +114,7 @@ function AuthProvider({children} :AuthProviderProps){
                 });
             });
 
-            setData(data)
+            setData(user)
 
         }catch(error:any){
             throw new Error(error)
@@ -125,7 +125,6 @@ function AuthProvider({children} :AuthProviderProps){
         async function loadUserData(){
             const userCollection = database.get<ModelUser>('users');
             const response = await userCollection.query().fetch();
-            console.log("###LOGADO")
             console.log(response)
 
             if(response.length > 0){
