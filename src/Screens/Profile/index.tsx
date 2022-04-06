@@ -7,7 +7,7 @@ import {
      LogoutButton,
      PhotoContainer,
      Photo,
-     PhotoButton,
+     CaptureImage,
      Content,
      ContentHeader,
      Option,
@@ -24,12 +24,18 @@ import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import { PasswordInput } from '../../Components/PasswordInput';
 
 import {useAuth} from '../../hooks/auth';
+import * as ImagePicker from 'expo-image-picker';
 
 export function Profile(){
 
     const user = useAuth();
 
-    const[option, setOption] = useState<'dataEdit' | 'passwordEdit'>('dataEdit')
+    const[option, setOption] = useState<'dataEdit' | 'passwordEdit'>('dataEdit');
+    const[avatar, setAvatar] = useState(user.user.avatar);
+    const[name, setName] = useState(user.user.name);
+    const[driver_license, setDriver_licenser] = useState(user.user.driver_license);
+    const[email, setEmail] = useState(user.user.email);
+
 
     const theme = useTheme();
     const navigation = useNavigation();
@@ -39,11 +45,28 @@ export function Profile(){
     };
 
     function handleSinOut(){
-
     };
 
     function handleOptionChange(selected: 'dataEdit' | 'passwordEdit'){
         setOption(selected)
+    };
+
+
+    async function handlePickerImage(){
+        const result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes:ImagePicker.MediaTypeOptions.Images,
+            allowsEditing:true,
+            aspect:[4,4],
+            quality:1
+        });
+
+        if(result.cancelled){
+            return;
+        };
+
+        if(result.uri){
+            setAvatar(result.uri)
+        }
     }
 
     return(
@@ -58,7 +81,7 @@ export function Profile(){
                         />
                         <HeaderTitle>Editar Perfil</HeaderTitle>
                         <LogoutButton 
-                        onPress={handleSinOut}
+                        onPress={user.singOut}
                         >
                             <Feather 
                                 name='power'
@@ -70,19 +93,16 @@ export function Profile(){
                     </HeaderTop>
 
                     <PhotoContainer>
-                        <Photo
-                            source={{uri:'https://avatars.githubusercontent.com/u/91087463?v=4'}}
-                        />
-
-                        <PhotoButton
-                            onPress={() => {}}
+                     {!!avatar && <Photo source={{uri:avatar}}/>}
+                        <CaptureImage
+                            onPress={handlePickerImage}
                         >
                             <Feather
-                                name="camera"
-                                size={24}
-                                color={theme.colors.shape}
-                            />
-                        </PhotoButton>
+                                    name="camera"
+                                    size={24}
+                                    color={theme.colors.shape}
+                                />
+                        </CaptureImage>
                     </PhotoContainer>
                 </Header>
 
@@ -113,19 +133,21 @@ export function Profile(){
                            iconName='user'
                            placeholder="Nome"
                            autoCorrect={false}
-                           defaultValue={user.user.name}
+                           defaultValue={name}
+                           onChangeText={setName}
                        />
                        <Input
                            iconName='mail'
                            editable={false}
-                           defaultValue={user.user.email}
+                           defaultValue={email}
 
                        />
                        <Input
                            iconName='credit-card'
                            placeholder="CNH"
                            keyboardType='numeric'
-                           defaultValue={user.user.driver_license}
+                           defaultValue={driver_license}
+                           onChangeText={setDriver_licenser}
 
                        />
                    </Section>   
